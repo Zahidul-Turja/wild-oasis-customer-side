@@ -1,3 +1,7 @@
 export default function Page() {
-  return <h1>Hello from NEXT app</h1>;
+  return (
+    <div>
+      <h1>The Wild Oasis. Welcome to paradise.</h1>
+    </div>
+  );
 }
