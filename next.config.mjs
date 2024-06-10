@@ -10,6 +10,7 @@ const nextConfig = {
       },
     ],
   },
+  // ! output: "export", to deploy static-ly
 };
 
 export default nextConfig;
