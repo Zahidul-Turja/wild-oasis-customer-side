@@ -10,7 +10,7 @@
     border-radius: 50%;
     border: 8px solid theme("colors.primary.900");
     border-right-color: theme("colors.primary.200");
-    animation: rotate 1s infinite linear;
+    /* animation: rotate 1s infinite linear; */
   }
 
   .spinner-mini {
@@ -20,7 +20,7 @@
     border-radius: 50%;
     border: 2px solid theme("colors.primary.200");
     border-right-color: transparent;
-    animation: rotate 1s infinite linear;
+    /* animation: rotate 1s infinite linear; */
   }
 
   @keyframes rotate {
