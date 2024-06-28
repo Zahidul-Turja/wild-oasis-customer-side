@@ -1,5 +1,4 @@
 import SubmitButton from "@/app/_components/SubmitButton";
-import Image from "next/image";
 import { updateGuest } from "../_lib/actions";
 
 function UpdateProfileForm({ guest, children }) {
@@ -33,15 +32,11 @@ function UpdateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <div className="h-5 rounded-sm relative">
-            <Image
-              src={countryFlag}
-              width={40}
-              height={40}
-              // src="https://flagcdn.com/pt.svg"
-              alt="Country flag"
-            />
-          </div>
+          <img
+            src={countryFlag}
+            alt="Country flag"
+            className="h-5 rounded-sm"
+          />
         </div>
         {children}
       </div>
