@@ -1,9 +1,11 @@
-import Link from "next/link";
-import { auth } from "../_lib/auth";
-import Image from "next/image";
+"use client";
 
-export default async function Navigation() {
-  const session = await auth();
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+export default function Navigation({ session }) {
+  const pathname = usePathname().split("/")[1];
 
   return (
     <nav className="z-10 text-xl">
@@ -11,7 +13,9 @@ export default async function Navigation() {
         <li>
           <Link
             href="/cabins"
-            className="hover:text-accent-400 transition-colors"
+            className={`hover:text-accent-400 transition-colors ${
+              pathname === "cabins" && "text-accent-400"
+            }`}
           >
             Cabins
           </Link>
@@ -19,7 +23,9 @@ export default async function Navigation() {
         <li>
           <Link
             href="/about"
-            className="hover:text-accent-400 transition-colors"
+            className={`hover:text-accent-400 transition-colors ${
+              pathname === "about" && "text-accent-400"
+            }`}
           >
             About
           </Link>
@@ -28,7 +34,9 @@ export default async function Navigation() {
           {session?.user?.image ? (
             <Link
               href="/account"
-              className="hover:text-accent-400 transition-colors flex items-center gap-4"
+              className={`hover:text-accent-400 transition-colors flex items-center gap-4 ${
+                pathname === "account" && "text-accent-400"
+              }`}
             >
               <div className="relative h-8 w-8 rounded-full">
                 <Image
