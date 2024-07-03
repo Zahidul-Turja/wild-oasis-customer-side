@@ -1,6 +1,8 @@
+import EditBookingForm from "@/app/_components/EditBookingForm";
 import SubmitButton from "@/app/_components/SubmitButton";
 import { updateBooking } from "@/app/_lib/actions";
 import { getBooking, getCabin } from "@/app/_lib/data-service";
+import toast from "react-hot-toast";
 
 export default async function Page({ params }) {
   const { bookingId } = params;
@@ -13,8 +15,23 @@ export default async function Page({ params }) {
         Edit Reservation #{bookingId}
       </h2>
 
-      <form
+      <EditBookingForm
+        bookingId={bookingId}
+        numGuests={numGuests}
+        observations={observations}
+        maxCapacity={maxCapacity}
+      />
+
+      {/* <form
         action={updateBooking}
+        // action={async (formData) => {
+        //   const result = await updateBooking(formData);
+        //   if (result?.error) {
+        //     toast.error(result.error);
+        //     return;
+        //   }
+        //   toast.success("Profile updated successfully");
+        // }}
         className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
       >
         <input type="hidden" value={bookingId} name="bookingId" />
@@ -55,7 +72,7 @@ export default async function Page({ params }) {
             Update reservation
           </SubmitButton>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }

@@ -4,10 +4,12 @@ import { differenceInDays } from "date-fns";
 import { useReservation } from "./ReservationContext";
 import { createBooking } from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
+import toast from "react-hot-toast";
+import Image from "next/image";
 
 function ReservationForm({ cabin, user }) {
   const { range, resetRange } = useReservation();
-  const { maxCapacity, regularPrice, discount, id } = cabin;
+  const { maxCapacity, regularPrice, discount, id, name } = cabin;
 
   const startDate = range.from;
   const endDate = range.to;
@@ -31,22 +33,36 @@ function ReservationForm({ cabin, user }) {
         <p>Logged in as</p>
 
         <div className="flex gap-4 items-center">
-          <img
-            // Important to display google profile images
-            referrerPolicy="no-referrer"
-            className="h-8 rounded-full"
-            src={user.image}
-            alt={user.name}
-          />
+          <div className="h-8 w-8 relative rounded-full">
+            <Image
+              // Important to display google profile images
+              referrerPolicy="no-referrer"
+              className="object-cover rounded-full"
+              width={100}
+              height={100}
+              src={user.image}
+              alt={user.name}
+            />
+          </div>
           <p>{user.name}</p>
         </div>
       </div>
 
       <form
         // action={createBookingWithData}
+        // action={async (formData) => {
+        //   await createBookingWithData(formData);
+        //   resetRange();
+        // }}
         action={async (formData) => {
-          await createBookingWithData(formData);
+          const result = await createBookingWithData(formData);
           resetRange();
+
+          if (result?.error) {
+            toast.error(result.error);
+            return;
+          }
+          toast.success(`Cabin #${name} Successfully Booked`);
         }}
         className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
       >

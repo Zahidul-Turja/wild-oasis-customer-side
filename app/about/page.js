@@ -1,7 +1,6 @@
+import image1 from "@/public/about-1.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import image1 from "@/public/about-1.jpg";
-import image2 from "@/public/about-2.jpg";
 import { getCabins } from "../_lib/data-service";
 
 export const revalidate = 86400;

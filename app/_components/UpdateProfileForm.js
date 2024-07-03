@@ -1,12 +1,24 @@
+"use client";
+
 import SubmitButton from "@/app/_components/SubmitButton";
 import { updateGuest } from "../_lib/actions";
+import toast from "react-hot-toast";
+import Image from "next/image";
 
 function UpdateProfileForm({ guest, children }) {
   const { fullName, email, nationality, nationalID, countryFlag } = guest;
 
   return (
     <form
-      action={updateGuest}
+      // action={updateGuest}
+      action={async (formData) => {
+        const result = await updateGuest(formData);
+        if (result?.error) {
+          toast.error(result.error);
+          return;
+        }
+        toast.success("Profile updated successfully");
+      }}
       className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
     >
       <div className="space-y-2">
@@ -32,11 +44,20 @@ function UpdateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <img
-            src={countryFlag}
-            alt="Country flag"
-            className="h-5 rounded-sm"
-          />
+
+          <div
+            className={`relative h-8 ${
+              nationality === "Nepal" ? "aspect-[5/6]" : "aspect-[7/4]"
+            }`}
+          >
+            <Image
+              src={countryFlag}
+              alt="Country flag"
+              width={100}
+              height={100}
+              className="object-cover rounded-sm"
+            />
+          </div>
         </div>
         {children}
       </div>
