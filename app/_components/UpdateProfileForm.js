@@ -50,13 +50,17 @@ function UpdateProfileForm({ guest, children }) {
               nationality === "Nepal" ? "aspect-[5/6]" : "aspect-[7/4]"
             }`}
           >
-            <Image
-              src={countryFlag}
-              alt="Country flag"
-              width={100}
-              height={100}
-              className="object-cover rounded-sm"
-            />
+            {countryFlag ? (
+              <Image
+                src={countryFlag}
+                alt="Country flag"
+                width={100}
+                height={100}
+                className="object-cover rounded-sm"
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {children}
